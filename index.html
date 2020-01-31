@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>text_ARMO</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+  </head>
+  <body>
+    <script>
+      async function getResponse() {
+        const remote = require('electron').remote;
+        var something = await new Promise((resolve, reject) => {
+          let response
+          while(response === undefined){
+           response = remote.getGlobal('something');
+          }
+          resolve(response);
+        })
+        document.write(something);
+      };
+      getResponse();
+    </script>
+  </body>
+</html>
